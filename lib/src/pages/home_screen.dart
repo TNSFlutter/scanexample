@@ -43,7 +43,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> with SingleTickerProviderSta
   @override
   void initState() {
     super.initState();
-    _animationController = new AnimationController(duration: new Duration(seconds: 5), vsync: this);
+    _animationController = new AnimationController(duration: new Duration(seconds: 3), vsync: this);
 
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -81,7 +81,7 @@ class _HomeScreenState extends StateMVC<HomeScreen> with SingleTickerProviderSta
       type: MaterialType.transparency,
       child: Stack(
         children: <Widget>[
-          Container(child: _buildQrView(context)),
+          Container(child: _buildQrView(context, height, width)),
           Container(
             child: ImageScannerAnimation(
               _animationStopped,
@@ -120,8 +120,8 @@ class _HomeScreenState extends StateMVC<HomeScreen> with SingleTickerProviderSta
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Container(
                     margin: EdgeInsets.only(right: 8, left: 0, top: 8, bottom: 8),
-                    width: 78,
-                    height: 78,
+                    width: width * 0.16,
+                    height: width * 0.16,
                     child:
                         Image.network("https://cdn.iconscout.com/icon/premium/png-512-thumb/broccoli-11-136267.png")),
                 Container(
@@ -165,17 +165,16 @@ class _HomeScreenState extends StateMVC<HomeScreen> with SingleTickerProviderSta
     );
   }
 
-  Widget _buildQrView(BuildContext context) {
+  Widget _buildQrView(BuildContext context, height, width) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
-    var scanArea =
-        (MediaQuery.of(context).size.width < 400 || MediaQuery.of(context).size.height < 400) ? 150.0 : 300.0;
+    var scanArea = width * 0.73;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: _con.qrKey,
       onQRViewCreated: _con.onQRViewCreated,
       overlay: QrScannerOverlayShape(
-          borderColor: Colors.black12, borderRadius: 10, borderLength: 30, borderWidth: 10, cutOutSize: scanArea),
+          borderColor: Colors.black26, borderRadius: 10, borderLength: 30, borderWidth: 10, cutOutSize: scanArea),
     );
   }
 }

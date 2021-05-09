@@ -11,7 +11,7 @@ class ImageScannerAnimation extends AnimatedWidget {
 
   Widget build(BuildContext context) {
     final Animation<double> animation = listenable;
-    final scorePosition = (animation.value * 280) + 260;
+    final scorePosition = (animation.value * 250) + 280;
 
     Color color1 = Color(0x5532CD32);
     Color color2 = Color(0x0032CD32);
